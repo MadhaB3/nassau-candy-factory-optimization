@@ -13,19 +13,19 @@ st.set_page_config(page_title="Nassau Candy | Factory Optimization", layout="wid
 # ------------------------------------------------------------------
 @st.cache_data
 def load_data():
-    df = pd.read_csv("data/nassau_clean.csv")
-    routes = pd.read_csv("data/route_clusters.csv")
-    recs = pd.read_csv("data/top_recommendations.csv")
-    sim = pd.read_csv("data/scenario_simulation_full.csv")
-    with open("models/model_results.json") as f:
+    df = pd.read_csv("nassau_clean.csv")
+    routes = pd.read_csv("route_clusters.csv")
+    recs = pd.read_csv("top_recommendations.csv")
+    sim = pd.read_csv("scenario_simulation_full.csv")
+    with open("model_results.json") as f:
         model_results = json.load(f)
-    with open("data/kpi_summary.json") as f:
+    with open("kpi_summary.json") as f:
         kpi = json.load(f)
     return df, routes, recs, sim, model_results, kpi
 
 @st.cache_resource
 def load_model():
-    return joblib.load("models/lead_time_model.joblib")
+    return joblib.load("lead_time_model.joblib")
 
 df, routes, recs, sim, model_results, kpi = load_data()
 model = load_model()
